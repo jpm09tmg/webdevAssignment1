@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter - Temperature</title>
+    <style></style>
+</head>
+<body>
+    <h1>Unit Converter</h1>
+    
+    <nav>
+        <a href="weight.html"><button>Weight</button></a>
+        <a href="distance.html"><button>Distance</button></a>
+        <a href="temperature.html"><button>Temperature</button></a>
+    </nav>
+
+    <div id="temperatureContent">
+        <h2>Temperature Conversion</h2>
+        
+        <h3>Celsius to Fahrenheit</h3>
+        <input type="number" id="celsiusInput">
+        <button onclick="convertCelsiusToF()">Convert</button>
+        <p id="celsiusResult"></p>
+        
+        <h3>Fahrenheit to Celsius</h3>
+        <input type="number" id="fahrenheitInput">
+        <button onclick="convertFahrenheitToC()">Convert</button>
+        <p id="fahrenheitResult"></p>
+        
+        <h3>Array Conversion (Celsius to F)</h3>
+        <input type="text" id="celsiusInputs" placeholder="e.g. 0, 100, 37">
+        <button onclick="convertCelsiusArrayToF()">Convert Array</button>
+        <p id="celsiusResults"></p>
+        
+        <h3>Array Conversion (F to Celsius)</h3>
+        <input type="text" id="fahrenheitInputs" placeholder="e.g. 32, 212, 98.6">
+        <button onclick="convertFahrenheitArrayToC()">Convert Array</button>
+        <p id="fahrenheitResults"></p>
+    </div>
+
+    <script>
+        const callConverter = (fromUnit, toUnit) => {
+            const conversions = {
+                'celsius-fahrenheit': (value) => (value * 9/5) + 32,
+                'fahrenheit-celsius': (value) => (value - 32) * 5/9
+            };
+
+            const conversionKey = `${fromUnit}-${toUnit}`;
+            const conversionFunction = conversions[conversionKey];
+
+            return (input) => {
+                if (Array.isArray(input)) {
+                    return input.map(value => conversionFunction(value));
+                } else {
+                    return conversionFunction(input);
+                }
+            };
+        };
+
+        const celsiusToF = callConverter('celsius', 'fahrenheit');
+        const fahrenheitToC = callConverter('fahrenheit', 'celsius');
+
+        function convertCelsiusToF() {
+            const input = parseFloat(document.getElementById('celsiusInput').value);
+            const result = celsiusToF(input);
+            document.getElementById('celsiusResult').textContent = `${input}°C = ${result.toFixed(2)}°F`;
+        }
+
+        function convertFahrenheitToC() {
+            const input = parseFloat(document.getElementById('fahrenheitInput').value);
+            const result = fahrenheitToC(input);
+            document.getElementById('fahrenheitResult').textContent = `${input}°F = ${result.toFixed(2)}°C`;
+        }
+
+        function convertCelsiusArrayToF() {
+            const input = document.getElementById('celsiusInputs').value.split(',').map(x => parseFloat(x.trim()));
+            const result = celsiusToF(input);
+            document.getElementById('celsiusResults').textContent = `[${input.join(', ')}]°C = [${result.map(x => x.toFixed(2)).join(', ')}]°F`;
+        }
+
+        function convertFahrenheitArrayToC() {
+            const input = document.getElementById('fahrenheitInputs').value.split(',').map(x => parseFloat(x.trim()));
+            const result = fahrenheitToC(input);
+            document.getElementById('fahrenheitResults').textContent = `[${input.join(', ')}]°F = [${result.map(x => x.toFixed(2)).join(', ')}]°C`;
+        }
+    </script>
+</body>
+</html>
