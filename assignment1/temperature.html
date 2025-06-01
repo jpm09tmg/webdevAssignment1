@@ -6,36 +6,36 @@
     <title>Unit Converter - Temperature</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Unit Converter</h1>
+<body class="flex flex-col justify-center">
+    <h1 class="text-center font-extrabold text-3xl">Unit Converter</h1>
     
-    <nav>
-        <a href="weight.html"><button>Weight</button></a>
-        <a href="distance.html"><button>Distance</button></a>
-        <a href="temperature.html"><button>Temperature</button></a>
+    <nav class="flex flex-wrap justify-around bg-blue-400">
+        <a href="weight.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Weight</a>
+        <a href="distance.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Distance</a>
+        <a href="temperature.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Temperature</a>
     </nav>
 
-    <div id="temperatureContent">
-        <h2>Temperature Conversion</h2>
+    <div id="temperatureContent" class="bg-amber-100 p-3">
+        <h2 class="text-2xl underline">Temperature Conversion</h2>
         
-        <h3>Celsius to Fahrenheit</h3>
-        <input type="number" id="celsiusInput">
-        <button onclick="convertCelsiusToF()">Convert</button>
+        <h3 class="pt-4">Celsius to Fahrenheit</h3>
+        <input type="number" id="celsiusInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertCelsiusToF()"  class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
         <p id="celsiusResult"></p>
         
-        <h3>Fahrenheit to Celsius</h3>
-        <input type="number" id="fahrenheitInput">
-        <button onclick="convertFahrenheitToC()">Convert</button>
+        <h3 class="pt-3">Fahrenheit to Celsius</h3>
+        <input type="number" id="fahrenheitInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertFahrenheitToC()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
         <p id="fahrenheitResult"></p>
         
-        <h3>Array Conversion (Celsius to F)</h3>
-        <input type="text" id="celsiusInputs" placeholder="e.g. 0, 100, 37">
-        <button onclick="convertCelsiusArrayToF()">Convert Array</button>
+        <h3 class="pt-3">Array Conversion (Celsius to F)</h3>
+        <input type="text" id="celsiusInputs" placeholder="e.g. 0, 100, 37" class="border-2 border-black rounded w-38" >
+        <button onclick="convertCelsiusArrayToF()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
         <p id="celsiusResults"></p>
         
-        <h3>Array Conversion (F to Celsius)</h3>
-        <input type="text" id="fahrenheitInputs" placeholder="e.g. 32, 212, 98.6">
-        <button onclick="convertFahrenheitArrayToC()">Convert Array</button>
+        <h3 class="pt-3">Array Conversion (F to Celsius)</h3>
+        <input type="text" id="fahrenheitInputs" placeholder="e.g. 32, 212, 98.6" class="border-2 border-black rounded w-38">
+        <button onclick="convertFahrenheitArrayToC()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
         <p id="fahrenheitResults"></p>
     </div>
 
