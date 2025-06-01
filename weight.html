@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unit Converter - Weight</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="flex flex-col justify-center">
+    <h1 class="text-center font-extrabold text-3xl">Unit Converter</h1>
+
+    <nav class="flex flex-wrap justify-around bg-blue-400">
+      <a href="weight.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Weight</a>
+      <a href="distance.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Distance</a>
+      <a href="temperature.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Temperature</a>
+    </nav>
+
+    <div id="weightContent" class="bg-amber-100 p-3">
+      <h2 class="text-2xl underline">Weight Conversion</h2>
+
+      <h3 class="pt-4">Pounds to Kilograms</h3>
+      <input type="number" id="lbInput" class="border-2 border-black rounded w-38"/>
+      <button onclick="convertLbToKg()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+      <p id="lbResult"></p>
+
+      <h3 class="pt-3">Kilograms to Pounds</h3>
+      <input type="number" id="kgInput" class="border-2 border-black rounded w-38"/>
+      <button onclick="convertKgToLb()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+      <p id="kgResult"></p>
+
+      <h3 class="pt-3">Array Conversion (Pounds to Kg)</h3>
+      <input type="text" id="lbInputs" placeholder="e.g. 150, 200, 75" class="border-2 border-black rounded w-38"/>
+      <button onclick="convertLbArrayToKg()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+      <p id="lbResults"></p>
+
+      <h3 class="pt-3">Array Conversion (Kg to Pounds)</h3>
+      <input type="text" id="kgInputs" placeholder="e.g. 68, 90, 34" class="border-2 border-black rounded w-38" />
+      <button onclick="convertKgArrayToLb()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+      <p id="kgResults"></p>
+    </div>
+
+    <script>
+      const callConverter = (fromUnit, toUnit) => {
+          const conversions = {
+              'lb-kg': (value) => value * 0.453592,
+              'kg-lb': (value) => value * 2.20462,
+          };
+
+          const conversionKey = `${fromUnit}-${toUnit}`;
+          const conversionFunction = conversions[conversionKey];
+
+          return (input) => {
+              if (Array.isArray(input)) {
+                  return input.map(value => conversionFunction(value));
+              } else {
+                  return conversionFunction(input);
+              }
+          };
+      };
+
+      const lbToKg = callConverter('lb', 'kg');
+      const kgToLb = callConverter('kg', 'lb');
+
+      function convertLbToKg() {
+          const input = parseFloat(document.getElementById('lbInput').value);
+          const result = lbToKg(input);
+          document.getElementById('lbResult').textContent = `${input} lbs = ${result.toFixed(2)} kgs`;
+      }
+
+      function convertKgToLb() {
+          const input = parseFloat(document.getElementById('kgInput').value);
+          const result = kgToLb(input);
+          document.getElementById('kgResult').textContent = `${input} kgs = ${result.toFixed(2)} lbs`;
+      }
+
+      function convertLbArrayToKg() {
+          const input = document.getElementById('lbInputs').value.split(',').map(x => parseFloat(x.trim()));
+          const result = lbToKg(input);
+          document.getElementById('lbResults').textContent = `[${input.join(', ')}] lbs = [${result.map(x => x.toFixed(2)).join(', ')}] kgs`;
+      }
+
+      function convertKgArrayToLb() {
+          const input = document.getElementById('kgInputs').value.split(',').map(x => parseFloat(x.trim()));
+          const result = kgToLb(input);
+          document.getElementById('kgResults').textContent = `[${input.join(', ')}] kgs = [${result.map(x => x.toFixed(2)).join(', ')}] lbs`;
+      }
+    </script>
+  </body>
+</html>

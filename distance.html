@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter - Distance</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="flex flex-col justify-center">
+    <h1 class="text-center font-extrabold text-3xl">Unit Converter</h1>
+    
+    <nav class="flex flex-wrap justify-around bg-blue-400">
+        <a href="weight.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Weight</a>
+        <a href="distance.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Distance</a>
+        <a href="temperature.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Temperature</a>
+    </nav>
+
+    <div id="distanceContent" class="bg-amber-100 p-3">
+        <h2 class="text-2xl underline">Distance Conversion</h2>
+        
+        <h3 class="pt-4">Miles to Kilometers</h3>
+        <input type="number" id="milesInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertMilesToKm()"  class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+        <p id="milesResult"></p>
+        
+        <h3 class="pt-3">Kilometers to Miles</h3>
+        <input type="number" id="kmInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertKmToMiles()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
+        <p id="kmResult"></p>
+        
+        <h3 class="pt-3">Array Conversion (Miles to Km)</h3>
+        <input type="text" id="milesInputs" placeholder="e.g. 1, 5, 10" class="border-2 border-black rounded w-38">
+        <button onclick="convertMilesArrayToKm()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
+        <p id="milesResults"></p>
+        
+        <h3 class="pt-3">Array Conversion (Km to Miles)</h3>
+        <input type="text" id="kmInputs" placeholder="e.g. 1.6, 8, 16.1" class="border-2 border-black rounded w-38">
+        <button onclick="convertKmArrayToMiles()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
+        <p id="kmResults"></p>
+    </div>
+
+    <script>
+        const callConverter = (fromUnit, toUnit) => {
+            const conversions = {
+                'miles-km': (value) => value * 1.60934,
+                'km-miles': (value) => value * 0.621371,
+            };
+
+            const conversionKey = `${fromUnit}-${toUnit}`;
+            const conversionFunction = conversions[conversionKey];
+
+            return (input) => {
+                if (Array.isArray(input)) {
+                    return input.map(value => conversionFunction(value));
+                } else {
+                    return conversionFunction(input);
+                }
+            };
+        };
+
+        const milesToKm = callConverter('miles', 'km');
+        const kmToMiles = callConverter('km', 'miles');
+
+        function convertMilesToKm() {
+            const input = parseFloat(document.getElementById('milesInput').value);
+            const result = milesToKm(input);
+            document.getElementById('milesResult').textContent = `${input} miles = ${result.toFixed(2)} km`;
+        }
+
+        function convertKmToMiles() {
+            const input = parseFloat(document.getElementById('kmInput').value);
+            const result = kmToMiles(input);
+            document.getElementById('kmResult').textContent = `${input} km = ${result.toFixed(2)} miles`;
+        }
+
+        function convertMilesArrayToKm() {
+            const input = document.getElementById('milesInputs').value.split(',').map(x => parseFloat(x.trim()));
+            const result = milesToKm(input);
+            document.getElementById('milesResults').textContent = `[${input.join(', ')}] miles = [${result.map(x => x.toFixed(2)).join(', ')}] km`;
+        }
+
+        function convertKmArrayToMiles() {
+            const input = document.getElementById('kmInputs').value.split(',').map(x => parseFloat(x.trim()));
+            const result = kmToMiles(input);
+            document.getElementById('kmResults').textContent = `[${input.join(', ')}] km = [${result.map(x => x.toFixed(2)).join(', ')}] miles`;
+        }
+    </script>
+</body>
+</html>
