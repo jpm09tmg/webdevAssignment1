@@ -6,36 +6,36 @@
     <title>Unit Converter - Distance</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Unit Converter</h1>
+<body class="flex flex-col justify-center">
+    <h1 class="text-center font-extrabold text-3xl">Unit Converter</h1>
     
-    <nav>
-        <a href="weight.html"><button>Weight</button></a>
-        <a href="distance.html"><button>Distance</button></a>
-        <a href="temperature.html"><button>Temperature</button></a>
+    <nav class="flex flex-wrap justify-around bg-blue-400">
+        <a href="weight.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Weight</a>
+        <a href="distance.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Distance</a>
+        <a href="temperature.html" class="px-6 py-3 text-center text-white hover:bg-blue-100 hover:text-black">Temperature</a>
     </nav>
 
-    <div id="distanceContent">
-        <h2>Distance Conversion</h2>
+    <div id="distanceContent" class="bg-amber-100 p-3">
+        <h2 class="text-2xl underline">Distance Conversion</h2>
         
-        <h3>Miles to Kilometers</h3>
-        <input type="number" id="milesInput">
-        <button onclick="convertMilesToKm()">Convert</button>
+        <h3 class="pt-4">Miles to Kilometers</h3>
+        <input type="number" id="milesInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertMilesToKm()"  class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
         <p id="milesResult"></p>
         
-        <h3>Kilometers to Miles</h3>
-        <input type="number" id="kmInput">
-        <button onclick="convertKmToMiles()">Convert</button>
+        <h3 class="pt-3">Kilometers to Miles</h3>
+        <input type="number" id="kmInput" class="border-2 border-black rounded w-38">
+        <button onclick="convertKmToMiles()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert</button>
         <p id="kmResult"></p>
         
-        <h3>Array Conversion (Miles to Km)</h3>
-        <input type="text" id="milesInputs" placeholder="e.g. 1, 5, 10">
-        <button onclick="convertMilesArrayToKm()">Convert Array</button>
+        <h3 class="pt-3">Array Conversion (Miles to Km)</h3>
+        <input type="text" id="milesInputs" placeholder="e.g. 1, 5, 10" class="border-2 border-black rounded w-38">
+        <button onclick="convertMilesArrayToKm()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
         <p id="milesResults"></p>
         
-        <h3>Array Conversion (Km to Miles)</h3>
-        <input type="text" id="kmInputs" placeholder="e.g. 1.6, 8, 16.1">
-        <button onclick="convertKmArrayToMiles()">Convert Array</button>
+        <h3 class="pt-3">Array Conversion (Km to Miles)</h3>
+        <input type="text" id="kmInputs" placeholder="e.g. 1.6, 8, 16.1" class="border-2 border-black rounded w-38">
+        <button onclick="convertKmArrayToMiles()" class="px-2 py-0 border-2 rounded border-black hover:bg-red-700 hover:text-white">Convert Array</button>
         <p id="kmResults"></p>
     </div>
 
